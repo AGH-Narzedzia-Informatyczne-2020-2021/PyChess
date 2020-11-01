@@ -1,4 +1,15 @@
-"# Test-PS" 
-"# Test-PS" 
-"# Test-PS" 
-"PyChess" 
+# PyChess
+Cel projektu
+---
+*PyChess to projekt tworzony na przedmiot "Narzędzia informatyczne" polegający na stworzeniu popularnej gry w szachy za pomocą języka Python.* 
+
+ ---
+*Za realizacje proejktu odpowiadają:*
+ 
+ - Aneta Postrożny
+ - Anna Ostrowska
+ - Natalia Hałata
+ - Maciej Krajewski
+ - Paweł Wojciechowski
+ - Piotr Szcząchor
+ ---
