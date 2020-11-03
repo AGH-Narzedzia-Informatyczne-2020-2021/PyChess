@@ -1,4 +1,5 @@
-import pygame, sys
+import pygame as pg
+import sys
 
 screen = pygame.display.set_mode((1280, 720))
 while True:
