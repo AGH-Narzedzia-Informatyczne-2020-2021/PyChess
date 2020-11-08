@@ -1,10 +1,10 @@
 import pygame as pg
 import sys
 
-screen = pygame.display.set_mode((1280, 720))
+screen = pg.display.set_mode((1280, 720))
 while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
             sys.exit(0)
-    pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(0, 0, 100, 100))
-    pygame.display.flip()
+    pg.draw.rect(screen, (255, 255, 255), pg.Rect(0, 0, 100, 100))
+    pg.display.flip()
