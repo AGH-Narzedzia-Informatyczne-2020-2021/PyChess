@@ -1,15 +1,15 @@
-import sys
-
 import pygame as pg
 
-from Pawn import Pawn
-from constants import WIDTH, HEIGHT, WINDOW_NAME, COLUMNS, ROWS, SQUARE_SIZE, BLACK, WHITE
+from chess.figures.Pawn import Pawn
+from chess.constants import WIDTH, HEIGHT, WINDOW_NAME, COLUMNS, ROWS, SQUARE_SIZE, BLACK, WHITE
+
 
 class Board:
     def __init__(self):
         self.pieces = [[None for i in range(COLUMNS)] for j in range(ROWS)]
         self.window = pg.display.set_mode((WIDTH, HEIGHT))
         self.reset_board()
+        self.list_of_moves = [] #tuple (type of figure, moved to where)
         pg.display.set_caption(WINDOW_NAME)
 
     def show(self):
@@ -28,13 +28,12 @@ class Board:
 
     def reset_board(self):
         for i in range(COLUMNS):
-            self.pieces[1][i] = Pawn(1, i, BLACK)
-            self.pieces[6][i] = Pawn(6, i, WHITE)
+            self.pieces[1][i] = Pawn(BLACK)
+            self.pieces[6][i] = Pawn(WHITE)
+
+    def move_piece(self, start_pos, end_pos):
+        piece = self.pieces[start_pos[0]][start_pos[1]]
+        self.pieces[start_pos[0]][start_pos[1]] = None
+        self.pieces[end_pos[0]][end_pos[1]] = piece
 
 
-board = Board()
-while 1:
-    for event in pg.event.get():
-        if event.type == pg.QUIT:
-            sys.exit(0)
-    board.show()

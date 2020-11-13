@@ -1,6 +1,3 @@
-from constants import WHITE, BLACK
-
-
 class Figure:
     def __init__(self, column, row, color):
         self.column = column
