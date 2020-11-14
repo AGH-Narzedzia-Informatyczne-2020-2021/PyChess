@@ -16,21 +16,21 @@ class Knight:
         moves = []
 
         if self.color == WHITE:
-            moves.append((row+2), (column+1)
+            moves.append((row+2), (column+1))
             moves.append((row+2), (column-1))
             moves.append((row+1), (column+2))
             moves.append((row+1), (column-2))
-            moves.append((row-2), (column+1)
+            moves.append((row-2), (column+1))
             moves.append((row-2), (column-1))
             moves.append((row-1), (column+2))
             moves.append((row-1), (column-2))
 
         if self.color == BLACK:
-            moves.append((row + 2), (column + 1)
+            moves.append((row + 2), (column + 1))
             moves.append((row + 2), (column - 1))
             moves.append((row + 1), (column + 2))
             moves.append((row + 1), (column - 2))
-            moves.append((row - 2), (column + 1)
+            moves.append((row - 2), (column + 1))
             moves.append((row - 2), (column - 1))
             moves.append((row - 1), (column + 2))
             moves.append((row - 1), (column - 2))
@@ -41,21 +41,21 @@ class Knight:
         moves = []
 
         if self.color == WHITE:
-            moves.append((row + 2), (column + 1)
+            moves.append((row + 2), (column + 1))
             moves.append((row + 2), (column - 1))
             moves.append((row + 1), (column + 2))
             moves.append((row + 1), (column - 2))
-            moves.append((row - 2), (column + 1)
+            moves.append((row - 2), (column + 1))
             moves.append((row - 2), (column - 1))
             moves.append((row - 1), (column + 2))
             moves.append((row - 1), (column - 2))
 
         if self.color == BLACK:
-            moves.append((row + 2), (column + 1)
+            moves.append((row + 2), (column + 1))
             moves.append((row + 2), (column - 1))
             moves.append((row + 1), (column + 2))
             moves.append((row + 1), (column - 2))
-            moves.append((row - 2), (column + 1)
+            moves.append((row - 2), (column + 1))
             moves.append((row - 2), (column - 1))
             moves.append((row - 1), (column + 2))
             moves.append((row - 1), (column - 2))
