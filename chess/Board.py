@@ -1,5 +1,8 @@
+import sys
+
 import pygame as pg
 
+from chess.figures.Knight import Knight
 from chess.figures.Pawn import Pawn
 from chess.constants import WIDTH, HEIGHT, WINDOW_NAME, COLUMNS, ROWS, SQUARE_SIZE, BLACK, WHITE
 
@@ -26,10 +29,18 @@ class Board:
                     self.window.blit(self.pieces[i][j].image, square)
         pg.display.flip()
 
+    #stawianie figur
     def reset_board(self):
+        #pionki
         for i in range(COLUMNS):
             self.pieces[1][i] = Pawn(BLACK)
             self.pieces[6][i] = Pawn(WHITE)
+        #konie
+        self.pieces[0][1] = Knight(BLACK)
+        self.pieces[0][6] = Knight(BLACK)
+        self.pieces[7][1] = Knight(WHITE)
+        self.pieces[7][6] = Knight(WHITE)
+
 
     def move_piece(self, start_pos, end_pos):
         piece = self.pieces[start_pos[0]][start_pos[1]]

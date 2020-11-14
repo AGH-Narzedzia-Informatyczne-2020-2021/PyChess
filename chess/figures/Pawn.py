@@ -6,9 +6,9 @@ class Pawn:
     def __init__(self, color):
         self.color = color
         if self.color == WHITE:
-            self.image = pg.transform.scale(pg.image.load('figures_graphics/wp.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.image = pg.transform.scale(pg.image.load('chess/figures_graphics/wp.png'), (SQUARE_SIZE, SQUARE_SIZE))
         else:
-            self.image = pg.transform.scale(pg.image.load('figures_graphics/bp.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.image = pg.transform.scale(pg.image.load('chess/figures_graphics/bp.png'), (SQUARE_SIZE, SQUARE_SIZE))
 
 
     #chodzenie
