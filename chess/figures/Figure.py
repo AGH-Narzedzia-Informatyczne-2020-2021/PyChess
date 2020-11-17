@@ -25,10 +25,7 @@ class Figure(ABC):
         return False
 
     def is_ally(self, another_figure):
-        if self.color == another_figure.color:
-            return True
-        else:
-            return False
+        return self.color == another_figure.color
 
     def is_king(self):
         type(self) == King
