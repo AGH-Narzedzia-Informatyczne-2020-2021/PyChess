@@ -7,9 +7,9 @@ class Rook(Piece):
 
     def load_image(self):
         if self.is_white:
-            self.image = pg.transform.scale(pg.image.load('chess/pieces_graphics/wR.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.image = pg.transform.scale(pg.image.load('pieces_graphics/bR.png'), (SQUARE_SIZE, SQUARE_SIZE))
         else:
-            self.image = pg.transform.scale(pg.image.load('chess/pieces_graphics/bR.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.image = pg.transform.scale(pg.image.load('pieces_graphics/wR.png'), (SQUARE_SIZE, SQUARE_SIZE))
 
     def get_possible_moves(self):
 
