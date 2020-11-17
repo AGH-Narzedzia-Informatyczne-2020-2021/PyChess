@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from chess.figures.King import King
 
 
 class Figure(ABC):
@@ -7,6 +8,7 @@ class Figure(ABC):
         self.row = row
         self.color = color
         self.pieces = pieces
+        self.image = None
 
     def move(self, column, row):
         if (column, row) in self.get_possible_moves():
@@ -19,6 +21,7 @@ class Figure(ABC):
                 if (figure.column, figure.row) == (column, row):
                     self.figures.remove(figure)
                     return True
+
         return False
 
     def is_ally(self, another_figure):
@@ -26,6 +29,13 @@ class Figure(ABC):
             return True
         else:
             return False
+
+    def is_king(self):
+        type(self) == King
+
+    @abstractmethod
+    def load_image(self):
+        pass
 
     @abstractmethod
     def get_possible_moves(self):
