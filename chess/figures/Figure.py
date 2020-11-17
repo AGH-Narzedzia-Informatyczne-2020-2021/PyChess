@@ -3,11 +3,11 @@ from chess.figures.King import King
 
 
 class Figure(ABC):
-    def __init__(self, column, row, is_white, pieces):
+    def __init__(self, column, row, is_white, figures):
         self.column = column
         self.row = row
         self.is_white = is_white
-        self.pieces = pieces
+        self.figures = figures
         self.image = None
 
     def move(self, column, row):
