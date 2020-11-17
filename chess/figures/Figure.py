@@ -37,12 +37,17 @@ class Figure(ABC):
 
     @abstractmethod
     def load_image(self):
+        # Powinna ładować obrazek do zmiennej image
         pass
 
     @abstractmethod
     def get_possible_moves(self):
+        # Powinna zwracać możliwe ruchy w formacie: (column, row),
+        # gdzie column i row to miejsce na które będzie przesunięta figura.
         pass
 
     @abstractmethod
     def get_possible_captures(self):
+        # Powinna zwracać możliwe zbicia w formacie: ((column, row), figure),
+        # gdzie column i row to miejsce na które będzie przesunięta figura, a figure to bita figura.
         pass
