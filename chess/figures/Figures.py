@@ -28,3 +28,9 @@ class Figures(list):
         king = self.get_king(is_white)
 
         return (king.column, king.row) in possible_captures
+
+    def copy(self):
+        copied = Figures()
+        for figure in self:
+            copied.append(figure.__class__(figure.column, figure.row, figure.is_white, copied))
+        return copied

@@ -11,16 +11,21 @@ class Figure(ABC):
         self.image = None
 
     def move(self, column, row):
-        if (column, row) in self.get_possible_moves():
+
+        def discovered_check():
+            copied_figures = self.figures.copy()
+            figure = copied_figures.get(column, row)
+            figure.column = column
+            figure.row = row
+            return copied_figures.is_checked(self.is_white)
+
+        if (column, row) in self.get_possible_moves() and not discovered_check():
             self.column = column
             self.row = row
             return True
 
-        if (column, row) in self.get_possible_captures():
-            for figure in self.figures:
-                if (figure.column, figure.row) == (column, row):
-                    self.figures.remove(figure)
-                    return True
+        if (column, row) in self.get_possible_captures() and not discovered_check():
+            self.figures.get(column, row)
 
         return False
 
