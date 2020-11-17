@@ -10,6 +10,7 @@ class Piece(ABC):
         self.is_white = is_white
         self.pieces = pieces
         self.image = None
+        self.load_image()
 
     def move(self, column, row):
 
