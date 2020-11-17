@@ -25,7 +25,7 @@ class Board:
         for i in range(ROWS):
             for j in range(COLUMNS):
                 square = (SQUARE_SIZE * i, SQUARE_SIZE * j, SQUARE_SIZE, SQUARE_SIZE)
-                print(square)
+                #print(square)
                 if (i + j) % 2:
                     pg.draw.rect(self.window, BLACK, pg.Rect(square))
                 else:
