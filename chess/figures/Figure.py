@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from chess.figures.King import King
+from chess.figures.Pawn import Pawn
 
 
 class Figure(ABC):
@@ -14,18 +15,29 @@ class Figure(ABC):
 
         def discovered_check():
             copied_figures = self.figures.copy()
-            figure = copied_figures.get(column, row)
-            figure.column = column
-            figure.row = row
+            copied_figure = copied_figures.get(self.column, self.row)
+            copied_figure.column = column
+            copied_figure.row = row
             return copied_figures.is_checked(self.is_white)
 
-        if (column, row) in self.get_possible_moves() and not discovered_check():
-            self.column = column
-            self.row = row
-            return True
+        possible_moves = self.get_possible_moves()
+        possible_captures = self.get_possible_captures()
 
-        if (column, row) in self.get_possible_captures() and not discovered_check():
-            self.figures.get(column, row)
+        for (move, figure) in possible_captures:
+            possible_moves.remove(move)
+
+        for (move, figure) in possible_captures:
+            if move == (column, row) and not discovered_check():
+                self.figures.remove(figure)
+                self.column = column
+                self.row = row
+                return True
+
+        for move in possible_moves:
+            if move == (column, row) and not discovered_check():
+                self.column = column
+                self.row = row
+                return True
 
         return False
 
@@ -42,12 +54,12 @@ class Figure(ABC):
 
     @abstractmethod
     def get_possible_moves(self):
-        # Powinna zwracać możliwe ruchy w formacie: (column, row),
+        # Powinna zwracać możliwe ruchy(w tym bicia) w formacie listy o elementach: (column, row),
         # gdzie column i row to miejsce na które będzie przesunięta figura.
         pass
 
     @abstractmethod
     def get_possible_captures(self):
-        # Powinna zwracać możliwe zbicia w formacie: ((column, row), figure),
+        # Powinna zwracać możliwe zbicia w formacie listy o elementach: ((column, row), figure),
         # gdzie column i row to miejsce na które będzie przesunięta figura, a figure to bita figura.
         pass

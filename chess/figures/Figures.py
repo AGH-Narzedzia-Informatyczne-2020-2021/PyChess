@@ -29,9 +29,7 @@ class Figures(list):
             if figure.is_white != is_white:
                 possible_captures.extend(figure.get_possible_captures())
 
-        king = self.get_king(is_white)
-
-        return (king.column, king.row) in possible_captures
+        return self.get_king() in possible_captures
 
     def copy(self):
         copied = Figures()
