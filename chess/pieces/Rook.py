@@ -1,15 +1,15 @@
-from chess.figures.Figure import Figure
+from chess.pieces.Piece import Piece
 from chess.constants import SQUARE_SIZE
 import pygame as pg
 
 
-class Rook(Figure):
+class Rook(Piece):
 
     def load_image(self):
         if self.is_white:
-            self.image = pg.transform.scale(pg.image.load('chess/figures_graphics/wR.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.image = pg.transform.scale(pg.image.load('chess/pieces_graphics/wR.png'), (SQUARE_SIZE, SQUARE_SIZE))
         else:
-            self.image = pg.transform.scale(pg.image.load('chess/figures_graphics/bR.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            self.image = pg.transform.scale(pg.image.load('chess/pieces_graphics/bR.png'), (SQUARE_SIZE, SQUARE_SIZE))
 
     def get_possible_moves(self):
 
@@ -18,11 +18,11 @@ class Rook(Figure):
         def add_moves(candidates_for_moves):
 
             for move in candidates_for_moves:
-                figure = self.figures.get(move)
+                piece = self.pieces.get(move)
 
-                if figure is None:
+                if piece is None:
                     possible_moves.append(move)
-                elif figure.is_white != self.is_white:
+                elif piece.is_white != self.is_white:
                     possible_moves.append(move)
                     return
                 else:
@@ -40,8 +40,8 @@ class Rook(Figure):
         possible_captures = []
 
         for move in self.get_possible_moves():
-            figure = self.figures.get(move)
-            if figure is not None:
-                possible_captures.append(move, figure)
+            piece = self.pieces.get(move)
+            if piece is not None:
+                possible_captures.append(move, piece)
 
         return possible_captures

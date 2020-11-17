@@ -2,8 +2,8 @@
 
 import pygame as pg
 
-from chess.figures.Knight import Knight
-from chess.figures.Pawn import Pawn
+from chess.pieces.Knight import Knight
+from chess.pieces.Pawn import Pawn
 from chess.constants import WIDTH, HEIGHT, WINDOW_NAME, COLUMNS, ROWS, SQUARE_SIZE, BLACK, WHITE
 
 

@@ -1,34 +1,34 @@
 from abc import ABC, abstractmethod
-from chess.figures.King import King
-from chess.figures.Pawn import Pawn
+from chess.pieces.King import King
+from chess.pieces.Pawn import Pawn
 
 
-class Figure(ABC):
-    def __init__(self, column, row, is_white, figures):
+class Piece(ABC):
+    def __init__(self, column, row, is_white, pieces):
         self.column = column
         self.row = row
         self.is_white = is_white
-        self.figures = figures
+        self.pieces = pieces
         self.image = None
 
     def move(self, column, row):
 
         def discovered_check():
-            copied_figures = self.figures.copy()
-            copied_figure = copied_figures.get(self.column, self.row)
-            copied_figure.column = column
-            copied_figure.row = row
-            return copied_figures.is_checked(self.is_white)
+            copied_pieces = self.pieces.copy()
+            copied_piece = copied_pieces.get(self.column, self.row)
+            copied_piece.column = column
+            copied_piece.row = row
+            return copied_pieces.is_checked(self.is_white)
 
         possible_moves = self.get_possible_moves()
         possible_captures = self.get_possible_captures()
 
-        for (move, figure) in possible_captures:
+        for (move, piece) in possible_captures:
             possible_moves.remove(move)
 
-        for (move, figure) in possible_captures:
+        for (move, piece) in possible_captures:
             if move == (column, row) and not discovered_check():
-                self.figures.remove(figure)
+                self.pieces.remove(piece)
                 self.column = column
                 self.row = row
                 return True
@@ -41,8 +41,8 @@ class Figure(ABC):
 
         return False
 
-    def is_ally(self, another_figure):
-        return self.is_white == another_figure.is_white
+    def is_ally(self, another_piece):
+        return self.is_white == another_piece.is_white
 
     def is_king(self):
         return type(self) == King
@@ -60,6 +60,6 @@ class Figure(ABC):
 
     @abstractmethod
     def get_possible_captures(self):
-        # Powinna zwracać możliwe zbicia w formacie listy o elementach: ((column, row), figure),
-        # gdzie column i row to miejsce na które będzie przesunięta figura, a figure to bita figura.
+        # Powinna zwracać możliwe zbicia w formacie listy o elementach: ((column, row), piece),
+        # gdzie column i row to miejsce na które będzie przesunięta figura, a piece to bita figura.
         pass
