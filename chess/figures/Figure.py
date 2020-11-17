@@ -33,7 +33,7 @@ class Figure(ABC):
         return self.is_white == another_figure.is_white
 
     def is_king(self):
-        type(self) == King
+        return type(self) == King
 
     @abstractmethod
     def load_image(self):
