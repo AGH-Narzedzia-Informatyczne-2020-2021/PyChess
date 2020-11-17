@@ -42,6 +42,6 @@ class Rook(Piece):
         for move in self.get_possible_moves():
             piece = self.pieces.get(move)
             if piece is not None:
-                possible_captures.append(move, piece)
+                possible_captures.append((move, piece))
 
         return possible_captures

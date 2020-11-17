@@ -8,14 +8,11 @@ from chess.pieces.Queen import Queen
 
 class Pieces(list):
 
-    def get(self, column, row):
+    def get(self, square):
         for piece in self:
-            if (column, row) == (piece.column, piece.row):
+            if square == (piece.column, piece.row):
                 return piece
         return None
-
-    def get(self, square):
-        return self.get(square[0], square[1])
 
     def get_king(self, is_white):
         for piece in self:
@@ -29,7 +26,7 @@ class Pieces(list):
             if piece.is_white != is_white:
                 possible_captures.extend(piece.get_possible_captures())
 
-        return self.get_king() in possible_captures
+        return self.get_king(is_white) in possible_captures
 
     def copy(self):
         copied = Pieces()

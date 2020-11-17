@@ -16,7 +16,7 @@ class Piece(ABC):
 
         def discovered_check():
             copied_pieces = self.pieces.copy()
-            copied_piece = copied_pieces.get(self.column, self.row)
+            copied_piece = copied_pieces.get((self.column, self.row))
             copied_piece.column = column
             copied_piece.row = row
             return copied_pieces.is_checked(self.is_white)

@@ -55,5 +55,5 @@ while True:
             sys.exit(0)
 
     board.draw()
-    #board.pieces[0].move(board.pieces[0].column, board.pieces[0].row+1)
+    board.pieces[0].move(board.pieces[0].column, board.pieces[0].row+1)
     time.sleep(1)
