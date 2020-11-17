@@ -12,6 +12,10 @@ class Figures(list):
         for figure in self:
             if (column, row) == (figure.column, figure.row):
                 return figure
+        return None
+
+    def get(self, square):
+        return self.get(square[0], square[1])
 
     def get_king(self, is_white):
         for figure in self:
