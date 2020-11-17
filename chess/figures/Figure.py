@@ -3,10 +3,10 @@ from chess.figures.King import King
 
 
 class Figure(ABC):
-    def __init__(self, column, row, color, pieces):
+    def __init__(self, column, row, is_white, pieces):
         self.column = column
         self.row = row
-        self.color = color
+        self.is_white = is_white
         self.pieces = pieces
         self.image = None
 
@@ -25,7 +25,7 @@ class Figure(ABC):
         return False
 
     def is_ally(self, another_figure):
-        return self.color == another_figure.color
+        return self.is_white == another_figure.is_white
 
     def is_king(self):
         type(self) == King
