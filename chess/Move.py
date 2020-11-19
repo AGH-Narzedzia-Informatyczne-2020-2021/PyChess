@@ -23,7 +23,7 @@ class Move:
         if self.captured_piece is not None:
             self.pieces.remove(self.captured_piece)
         if self.rook_move is not None:
-            self.previous_row.do()
+            self.rook_move.do()
 
     def undo(self):
         self.piece.column = self.previous_column
