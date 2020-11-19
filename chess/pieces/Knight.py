@@ -1,67 +1,49 @@
-from chess.constants import WHITE, BLACK, SQUARE_SIZE
+from chess.pieces.Piece import Piece
+from chess.constants import SQUARE_SIZE
+from chess.Move import Move
 import pygame as pg
+import os
 
-class Knight:
-    def __init__(self, color):
-        self.color = color
-        if self.color == WHITE:
-            self.image = pg.transform.scale(pg.image.load('chess/pieces_graphics/wN.png'), (SQUARE_SIZE, SQUARE_SIZE))
+class Knight(Piece):
+    def load_image(self):
+        if self.is_white:
+            path = os.path.join(os.getcwd(), 'pieces_graphics', 'wN.png')
+            self.image = pg.transform.scale(pg.image.load(path), (SQUARE_SIZE, SQUARE_SIZE))
         else:
-            self.image = pg.transform.scale(pg.image.load('chess/pieces_graphics/bN.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            path = os.path.join(os.getcwd(), 'pieces_graphics', 'bN.png')
+            self.image = pg.transform.scale(pg.image.load(path), (SQUARE_SIZE, SQUARE_SIZE))
 
 
-    #chodzenie
-    def physically_possible_moves(self, row, column):
+    def get_possible_moves(self):
 
-        moves = []
+        possible_moves = []
 
-        if self.color == WHITE:
-            moves.append((row + 2), (column + 1))
-            moves.append((row + 2), (column - 1))
-            moves.append((row + 1), (column + 2))
-            moves.append((row + 1), (column - 2))
-            moves.append((row - 2), (column + 1))
-            moves.append((row - 2), (column - 1))
-            moves.append((row - 1), (column + 2))
-            moves.append((row - 1), (column - 2))
+        def add_moves(candidates_for_moves):
 
-        if self.color == BLACK:
-            moves.append((row + 2), (column + 1))
-            moves.append((row + 2), (column - 1))
-            moves.append((row + 1), (column + 2))
-            moves.append((row + 1), (column - 2))
-            moves.append((row - 2), (column + 1))
-            moves.append((row - 2), (column - 1))
-            moves.append((row - 1), (column + 2))
-            moves.append((row - 1), (column - 2))
+                for square in candidates_for_moves:
 
-    #bicie
-    def physically_possible_captures(self, row, column):
+                    piece = self.pieces.get(square)
 
-        moves = []
+                    if piece is None:
+                        possible_moves.append(Move(self, square[0], square[1]))
 
-        if self.color == WHITE:
-            moves.append((row + 2), (column + 1))
-            moves.append((row + 2), (column - 1))
-            moves.append((row + 1), (column + 2))
-            moves.append((row + 1), (column - 2))
-            moves.append((row - 2), (column + 1))
-            moves.append((row - 2), (column - 1))
-            moves.append((row - 1), (column + 2))
-            moves.append((row - 1), (column - 2))
+                    elif piece.is_white != self.is_white:
+                        captured_piece = self.pieces.get(square)
+                        possible_moves.append(Move(self, square[0], square[1], captured_piece=captured_piece))
+                        return
 
-        if self.color == BLACK:
-            moves.append((row + 2), (column + 1))
-            moves.append((row + 2), (column - 1))
-            moves.append((row + 1), (column + 2))
-            moves.append((row + 1), (column - 2))
-            moves.append((row - 2), (column + 1))
-            moves.append((row - 2), (column - 1))
-            moves.append((row - 1), (column + 2))
-            moves.append((row - 1), (column - 2))
+                    else:
+                        return
 
-    def is_ally(self, another_figure):
-        if self.color == another_figure.color:
-            return True
-        else:
-            return False
+            add_moves((row + 2), (column + 1))
+            add_moves((row + 2), (column - 1))
+            add_moves((row + 1), (column + 2))
+            add_moves((row + 1), (column - 2))
+            add_moves((row - 2), (column + 1))
+            add_moves((row - 2), (column - 1))
+            add_moves((row - 1), (column + 2))
+            add_moves((row - 1), (column - 2))
+
+            return possible_moves
+
+
