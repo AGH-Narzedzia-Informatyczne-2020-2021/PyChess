@@ -9,10 +9,10 @@ class Rook(Piece):
 
     def load_image(self):
         if self.is_white:
-            path = os.path.join(os.getcwd(), 'pieces_graphics', 'bR.png')
+            path = os.path.join(os.getcwd(), 'pieces_graphics', 'wR.png')
             self.image = pg.transform.scale(pg.image.load(path), (SQUARE_SIZE, SQUARE_SIZE))
         else:
-            path = os.path.join(os.getcwd(), 'pieces_graphics', 'wR.png')
+            path = os.path.join(os.getcwd(), 'pieces_graphics', 'bR.png')
             self.image = pg.transform.scale(pg.image.load(path), (SQUARE_SIZE, SQUARE_SIZE))
 
     def get_possible_moves(self):
