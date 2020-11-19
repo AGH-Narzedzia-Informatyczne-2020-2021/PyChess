@@ -32,6 +32,5 @@ class Piece(ABC):
 
     @abstractmethod
     def get_possible_moves(self):
-        # Powinna zwracać możliwe ruchy(w tym bicia) w formacie listy o elementach: (column, row),
-        # gdzie column i row to miejsce na które będzie przesunięta figura.
+        # Powinna zwracać listę obiektów typu Move. Zajrzyj do klasy move żeby wiedzieć jak je tworzyć
         pass
