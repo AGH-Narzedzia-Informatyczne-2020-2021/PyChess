@@ -1,7 +1,9 @@
 from chess.pieces.Piece import Piece
 from chess.constants import SQUARE_SIZE
+from chess.Move import Move
 import pygame as pg
 import os
+
 
 class Rook(Piece):
 
@@ -19,14 +21,18 @@ class Rook(Piece):
 
         def add_moves(candidates_for_moves):
 
-            for move in candidates_for_moves:
-                piece = self.pieces.get(move)
+            for square in candidates_for_moves:
+
+                piece = self.pieces.get(square)
 
                 if piece is None:
-                    possible_moves.append(move)
+                    possible_moves.append(Move(self, square[0], square[1]))
+
                 elif piece.is_white != self.is_white:
-                    possible_moves.append(move)
+                    captured_piece = self.pieces.get(square)
+                    possible_moves.append(Move(self, square[0], square[1], captured_piece=captured_piece))
                     return
+
                 else:
                     return
 
@@ -36,14 +42,3 @@ class Rook(Piece):
         add_moves([(column, self.row) for column in range(self.column - 1, 0, -1)])     # pola na lewo od wieży
 
         return possible_moves
-
-    def get_possible_captures(self):
-
-        possible_captures = []
-
-        for move in self.get_possible_moves():
-            piece = self.pieces.get(move)
-            if piece is not None:
-                possible_captures.append((move, piece))
-
-        return possible_captures
