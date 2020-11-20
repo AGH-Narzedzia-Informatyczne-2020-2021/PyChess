@@ -1,41 +1,46 @@
-from chess.constants import WHITE, SQUARE_SIZE
+from chess.pieces.Piece import Piece
+from chess.constants import SQUARE_SIZE
+from chess.Move import Move
 import pygame as pg
+import os
 
 
-class Bishop:
-    def __init__(self, color):
-        self.color = color
-        if self.color == WHITE:
-            self.image = pg.transform.scale(pg.image.load('chess/pieces_graphics/wB.png'), (SQUARE_SIZE, SQUARE_SIZE))
+class Bishop(Piece):
+
+    def load_image(self):
+        if self.is_white:
+            path = os.path.join(os.getcwd(), 'pieces_graphics', 'wB.png')
+            self.image = pg.transform.scale(pg.image.load(path), (SQUARE_SIZE, SQUARE_SIZE))
         else:
-            self.image = pg.transform.scale(pg.image.load('chess/pieces_graphics/bB.png'), (SQUARE_SIZE, SQUARE_SIZE))
+            path = os.path.join(os.getcwd(), 'pieces_graphics', 'bB.png')
+            self.image = pg.transform.scale(pg.image.load(path), (SQUARE_SIZE, SQUARE_SIZE))
 
-# chodzenie
-    def physically_possible_moves(self, row, column):
+    def get_possible_moves(self):
 
-        moves = []
+        possible_moves = []
 
-        directions = ((-1, -1), (-1, 1), (1, -1), (1, 1))   # przekątne
-        for d in directions:
-            for i in range(1, 8):   # max 7 pól
-                end_row = row + d[0] * i
-                end_column = column + d[1] * i
-                moves.append((end_row, end_column))
+        def add_moves(candidates_for_moves):
 
-# bicie
-    def physically_possible_captures(self, row, column):
+            for square in candidates_for_moves:
 
-        moves = []
+                piece = self.pieces.get(square)
 
-        directions = ((-1, -1), (-1, 1), (1, -1), (1, 1))   # przekątne
-        for d in directions:
-            for i in range(1, 8):   # max 7 pól
-                end_row = row + d[0] * i
-                end_column = column + d[1] * i
-                moves.append((end_row, end_column))
+                if piece is None:
+                    possible_moves.append(Move(self, square[0], square[1]))
 
-    def is_ally(self, another_figure):
-        if self.color == another_figure.color:
-            return True
-        else:
-            return False
+                elif piece.is_white != self.is_white:
+                    captured_piece = self.pieces.get(square)
+                    possible_moves.append(Move(self, square[0], square[1], captured_piece=captured_piece))
+                    return
+
+                else:
+                    return
+
+            directions = ((-1, -1), (-1, 1), (1, -1), (1, 1))   # przekątne
+            for d in directions:
+                for i in range(1, 8):   # max 7 pól
+                    end_row = self.row + d[0] * i
+                    end_column = self.column + d[1] * i
+                    add_moves((end_row, end_column))
+
+        return possible_moves
