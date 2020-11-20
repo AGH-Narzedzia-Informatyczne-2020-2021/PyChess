@@ -20,13 +20,14 @@ class Pieces(list):
                 return piece
 
     def is_checked(self, is_white):
-        possible_captures = []
+        king = self.get_king(is_white)
 
         for piece in self:
             if piece.is_white != is_white:
-                possible_captures.extend(piece.get_possible_captures())
-
-        return self.get_king(is_white) in possible_captures
+                for move in piece.get_possible_moves(x=False):
+                    if move.captured_piece == king:
+                        return True
+        return False
 
     def copy(self):
         copied = Pieces()

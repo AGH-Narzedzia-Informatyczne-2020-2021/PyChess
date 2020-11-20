@@ -4,6 +4,7 @@ import time
 
 import pygame as pg
 
+from chess.pieces.King import King
 from chess.pieces.Knight import Knight
 from chess.pieces.Pawn import Pawn
 from chess.constants import WIDTH, HEIGHT, WINDOW_NAME, COLUMNS, ROWS, SQUARE_SIZE, BLACK, WHITE, RED
@@ -46,9 +47,9 @@ class Board:
         pg.display.flip()
 
     def basic_pieces_placer(self):
-        self.pieces.append(Rook(1, 1, True, self.pieces))
+        self.pieces.append(King(1, 1, True, self.pieces))
         self.pieces.append(Rook(8, 1, True, self.pieces))
-        self.pieces.append(Rook(1, 8, False, self.pieces))
+        self.pieces.append(King(1, 8, False, self.pieces))
         self.pieces.append(Rook(8, 8, False, self.pieces))
 
     def game(self):
@@ -64,11 +65,10 @@ class Board:
                     pos = pg.mouse.get_pos()
                     row, col = get_row_col_from_mouse(pos)
                     row, col = self.coordinates_to_chess_tiles(col, row)
-                    print(row, col)
                     for piece in self.pieces:
                         if (row, col) == (piece.column, piece.row) and self.turn == piece.is_white:
                             chosen_piece = piece
-                            self.draw_possible_moves(piece.get_possible_moves())
+                            self.draw_possible_moves(piece.get_legal_moves())
                             move_waiting = True
 
             while move_waiting:
