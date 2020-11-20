@@ -38,10 +38,13 @@ class Bishop(Piece):
 
         directions = ((-1, -1), (-1, 1), (1, -1), (1, 1))   # przekątne
         for d in directions:
+            candidates = []
             for i in range(1, 8):   # max 7 pól
-                end_row = self.row + d[0] * i
                 end_column = self.column + d[1] * i
-                while 0 <= end_row < 8 and 0 <= end_column < 8:
-                    add_moves([(end_row, end_column)])
+                end_row = self.row + d[0] * i
+                if 0 < end_row <= 8 and 0 < end_column <= 8:
+                    candidates.append((end_column, end_row))
+
+            add_moves(candidates)
 
         return possible_moves
