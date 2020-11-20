@@ -55,6 +55,7 @@ class Board:
         run = True
         while run:
             self.draw()
+            move_waiting = False
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     run = False
@@ -66,18 +67,23 @@ class Board:
                     print(row, col)
                     for piece in self.pieces:
                         if (row, col) == (piece.column, piece.row) and self.turn == piece.is_white:
+                            chosen_piece = piece
                             self.draw_possible_moves(piece.get_possible_moves())
-                            move_done = False
+                            move_waiting = True
 
-                            while not move_done:
-                                for event in pg.event.get():
-                                    if event.type == pg.MOUSEBUTTONDOWN:
-                                        pos = pg.mouse.get_pos()
-                                        row, col = get_row_col_from_mouse(pos)
-                                        row, col = self.coordinates_to_chess_tiles(col, row)
-                                        move_done = piece.move(row, col)
-                                        if move_done:
-                                            self.turn = not self.turn
+            while move_waiting:
+                for event in pg.event.get():
+                    if event.type == pg.QUIT:
+                        move_waiting = False
+                        run = False
+                    elif event.type == pg.MOUSEBUTTONDOWN:
+                        pos = pg.mouse.get_pos()
+                        row, col = get_row_col_from_mouse(pos)
+                        row, col = self.coordinates_to_chess_tiles(col, row)
+                        move_done = chosen_piece.move(row, col)
+                        if move_done:
+                            self.turn = not self.turn
+                        move_waiting = False
 
         pg.quit()
 

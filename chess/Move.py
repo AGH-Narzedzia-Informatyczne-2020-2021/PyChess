@@ -31,4 +31,4 @@ class Move:
         if self.captured_piece is not None:
             self.pieces.append(self.captured_piece)
         if self.rook_move is not None:
-            self.previous_row.undo()
+            self.rook_move.undo()
