@@ -64,7 +64,6 @@ class Board:
                     pos = pg.mouse.get_pos()
                     row, col = get_row_col_from_mouse(pos)
                     row, col = self.coordinates_to_chess_tiles(col, row)
-                    print(row, col)
                     for piece in self.pieces:
                         if (row, col) == (piece.column, piece.row) and self.turn == piece.is_white:
                             chosen_piece = piece
