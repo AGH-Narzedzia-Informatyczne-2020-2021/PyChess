@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from chess.pieces.Pawn import Pawn
+
 
 
 class Piece(ABC):

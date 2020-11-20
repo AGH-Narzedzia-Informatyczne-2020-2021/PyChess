@@ -51,6 +51,10 @@ class Board:
         self.pieces.append(Rook(8, 1, True, self.pieces))
         self.pieces.append(King(1, 8, False, self.pieces))
         self.pieces.append(Rook(8, 8, False, self.pieces))
+        for i in range(1, 9):
+            self.pieces.append(Pawn(i, 2, True, self.pieces))
+            self.pieces.append(Pawn(i, 7, False, self.pieces))
+
 
     def game(self):
         run = True
