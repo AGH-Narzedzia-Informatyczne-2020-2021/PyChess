@@ -24,7 +24,7 @@ class Pieces(list):
 
         for piece in self:
             if piece.is_white != is_white:
-                for move in piece.get_possible_moves(x=False):
+                for move in piece.get_possible_moves():
                     if move.captured_piece == king:
                         return True
         return False
