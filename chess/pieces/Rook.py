@@ -15,7 +15,7 @@ class Rook(Piece):
             path = os.path.join(os.getcwd(), 'pieces_graphics', 'bR.png')
             self.image = pg.transform.scale(pg.image.load(path), (SQUARE_SIZE, SQUARE_SIZE))
 
-    def get_possible_moves(self, x=True):
+    def get_possible_moves(self):
 
         possible_moves = []
 

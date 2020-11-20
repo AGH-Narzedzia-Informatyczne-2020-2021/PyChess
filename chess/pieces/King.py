@@ -15,7 +15,7 @@ class King(Piece):
             path = os.path.join(os.getcwd(), 'pieces_graphics', 'bK.png')
             self.image = pg.transform.scale(pg.image.load(path), (SQUARE_SIZE, SQUARE_SIZE))
 
-    def get_possible_moves(self, x=True):
+    def get_possible_moves(self):
         possible_moves = []
 
         vectors = [(x, y) for x in [-1, 0, 1] for y in [-1, 0, 1]]
