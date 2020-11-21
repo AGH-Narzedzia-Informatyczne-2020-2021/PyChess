@@ -75,7 +75,7 @@ class Board:
                     piece = self.pieces.get((col, row))
                     if piece is not None and self.turn == piece.is_white:
                         chosen_piece = piece
-                        self.draw_possible_moves(piece.get_possible_moves())
+                        self.draw_possible_moves(piece.get_legal_moves())
                         move_waiting = True
 
 
