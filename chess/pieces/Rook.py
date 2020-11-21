@@ -27,12 +27,10 @@ class Rook(Piece):
 
                 if piece is None:
                     possible_moves.append(Move(self, square[0], square[1]))
-
                 elif piece.is_white != self.is_white:
                     captured_piece = self.pieces.get(square)
                     possible_moves.append(Move(self, square[0], square[1], captured_piece=captured_piece))
                     return
-
                 else:
                     return
 
