@@ -46,6 +46,8 @@ class Board:
         pg.display.flip()
 
     def basic_pieces_placer(self):
+
+        self.pieces.append(Knight(2, 1, True, self.pieces))
         self.pieces.append(Rook(1, 1, True, self.pieces))
         self.pieces.append(Rook(8, 1, True, self.pieces))
         self.pieces.append(Rook(1, 8, False, self.pieces))
