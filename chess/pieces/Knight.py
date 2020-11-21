@@ -19,22 +19,32 @@ class Knight(Piece):
 
             possible_moves = []
 
-            def add_moves(square):
 
-                #for square in candidates_for_moves:
+            def add_moves(candidates_for_moves):
+
+                for square in candidates_for_moves:
+
                     piece = self.pieces.get(square)
 
+                    if piece is None:
+                        possible_moves.append(Move(self, square[0], square[1]))
 
+                    elif piece.is_white != self.is_white:
+                        captured_piece = self.pieces.get(square)
+                        possible_moves.append(Move(self, square[0], square[1], captured_piece=captured_piece))
+                        return
 
+                    else:
+                        return
 
-            add_moves((self.column + 2, self.row + 1))
-            add_moves((self.column + 2, self.row - 1))
-            add_moves((self.column + 1, self.row + 2))
-            add_moves((self.column + 1, self.row - 2))
-            add_moves((self.column - 2, self.row + 1))
-            add_moves((self.column - 2, self.row - 1))
-            add_moves((self.column - 1, self.row + 2))
-            add_moves((self.column - 1, self.row - 2))
+            add_moves([(self.column + 2, self.row + 1)])
+            add_moves([(self.column + 2, self.row - 1)])
+            add_moves([(self.column + 1, self.row + 2)])
+            add_moves([(self.column + 1, self.row - 2)])
+            add_moves([(self.column - 2, self.row + 1)])
+            add_moves([(self.column - 2, self.row - 1)])
+            add_moves([(self.column - 1, self.row + 2)])
+            add_moves([(self.column - 1, self.row - 2)])
 
             return possible_moves
 

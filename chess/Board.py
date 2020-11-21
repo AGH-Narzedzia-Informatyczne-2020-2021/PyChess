@@ -47,11 +47,15 @@ class Board:
 
     def basic_pieces_placer(self):
 
-        self.pieces.append(Knight(2, 1, True, self.pieces))
         self.pieces.append(Rook(1, 1, True, self.pieces))
         self.pieces.append(Rook(8, 1, True, self.pieces))
         self.pieces.append(Rook(1, 8, False, self.pieces))
         self.pieces.append(Rook(8, 8, False, self.pieces))
+        self.pieces.append(Knight(2, 1, True, self.pieces))
+        self.pieces.append(Knight(7, 1, True, self.pieces))
+        self.pieces.append(Knight(2, 8, False, self.pieces))
+        self.pieces.append(Knight(7, 8, False, self.pieces))
+
 
     def game(self):
         run = True
