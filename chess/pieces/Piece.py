@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from chess.pieces.King import King
+
 from chess.pieces.Pawn import Pawn
 
 
@@ -13,7 +13,7 @@ class Piece(ABC):
         self.load_image()
 
     def move(self, column, row):
-        for move in self.get_possible_moves():
+        for move in self.get_legal_moves():
             if (column, row) == (move.column, move.row):
                 move.do()
                 return True
@@ -22,8 +22,16 @@ class Piece(ABC):
     def is_ally(self, another_piece):
         return self.is_white == another_piece.is_white
 
-    def is_king(self):
-        return type(self) == King
+    def get_legal_moves(self):
+        moves_to_delete = []
+        possible_moves = self.get_possible_moves()
+        for move in possible_moves:
+            if move.causes_self_check():
+                moves_to_delete.append(move)
+        for move in moves_to_delete:
+            possible_moves.remove(move)
+
+        return possible_moves
 
     @abstractmethod
     def load_image(self):
