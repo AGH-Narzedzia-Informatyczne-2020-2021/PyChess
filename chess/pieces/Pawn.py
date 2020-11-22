@@ -19,39 +19,55 @@ class Pawn(Piece):
 
         possible_moves = []
 
+        column = self.column
+        row = self.row
+        add_moves = possible_moves.append
+        get = self.pieces.get
 
+        #Biale
         if self.is_white:
-            if self.row == 2:
-                if self.pieces.get((self.column, self.row + 2)) is None and self.pieces.get((self.column, self.row + 1)) is None:
-                    possible_moves.append(Move(self, self.column, self.row + 2))
-                    possible_moves.append(Move(self, self.column, self.row + 1))
-                elif self.pieces.get((self.column, self.row + 2)) is not None and self.pieces.get((self.column, self.row + 1)) is None:
-                    possible_moves.append(Move(self, self.column, self.row + 1))
+            #Ruch z pozycji startowej
+            if row == 2:
+                if get((column, row + 2)) is None and get((column, row + 1)) is None:
+                    add_moves(Move(self, column, row + 2))
+                    add_moves(Move(self, column, row + 1))
+                elif get((column, row + 2)) is not None and get((column, row + 1)) is None:
+                    add_moves(Move(self, column, row + 1))
 
-            elif self.row != 8:
-                if self.pieces.get((self.column, self.row + 1)) is None:
-                    possible_moves.append(Move(self, self.column, self.row + 1))
-            if self.column != 8 and self.row != 8 and self.pieces.get((self.column + 1, self.row + 1)) is not None:
-                if self.pieces.get((self.column + 1, self.row + 1)).is_white != self.is_white:
-                    possible_moves.append(Move(self, self.column + 1, self.row + 1, self.pieces.get((self.column + 1, self.row + 1))))
-            if self.column != 1 and self.row != 8 and self.pieces.get((self.column - 1, self.row + 1)) is not None:
-                if self.pieces.get((self.column - 1, self.row + 1)).is_white != self.is_white:
-                    possible_moves.append(Move(self, self.column - 1, self.row + 1, self.pieces.get((self.column - 1, self.row + 1))))
+            #Zwykly ruch
+            elif row != 8:
+                if get((column, row + 1)) is None:
+                    add_moves(Move(self, column, row + 1))
+
+            #Bicie
+            if column != 8 and row != 8 and get((column + 1, row + 1)) is not None:
+                if get((column + 1, row + 1)).is_white != self.is_white:
+                    add_moves(Move(self, column + 1, row + 1, get((column + 1, row + 1))))
+            if column != 1 and row != 8 and get((column - 1, row + 1)) is not None:
+                if get((column - 1, row + 1)).is_white != self.is_white:
+                    add_moves(Move(self, column - 1, row + 1, get((column - 1, row + 1))))
+
+        #Czarne:
         else:
-            if self.row == 7:
-                if self.pieces.get((self.column, self.row - 2)) is None and self.pieces.get((self.column, self.row - 1)) is None:
-                    possible_moves.append(Move(self, self.column, self.row - 1))
-                    possible_moves.append(Move(self, self.column, self.row - 2))
-                elif self.pieces.get((self.column, self.row - 2)) is not None and self.pieces.get((self.column, self.row - 1)) is None:
-                    possible_moves.append(Move(self, self.column, self.row - 1))
-            elif self.row != 1:
-                if self.pieces.get((self.column, self.row - 1)) is None:
-                    possible_moves.append(Move(self, self.column, self.row - 1))
-            if self.column != 1 and self.row != 1 and self.pieces.get((self.column - 1, self.row - 1)) is not None:
-                if self.pieces.get((self.column - 1, self.row - 1)).is_white != self.is_white:
-                    possible_moves.append(Move(self, self.column - 1, self.row - 1, self.pieces.get((self.column - 1, self.row - 1))))
-            if self.column != 8 and self.row != 1 and self.pieces.get((self.column + 1, self.row - 1)) is not None:
-                if self.pieces.get((self.column + 1, self.row - 1)).is_white != self.is_white:
-                    possible_moves.append(Move(self, self.column + 1, self.row - 1, self.pieces.get((self.column + 1, self.row - 1))))
+            #Ruch z pozycji startowej
+            if row == 7:
+                if get((column, row - 2)) is None and get((column, row - 1)) is None:
+                    add_moves(Move(self, column, row - 1))
+                    add_moves(Move(self, column, row - 2))
+                elif get((column, row - 2)) is not None and get((column, row - 1)) is None:
+                    add_moves(Move(self, column, row - 1))
+
+            #Zwykly ruch
+            elif row != 1:
+                if get((column, row - 1)) is None:
+                    add_moves(Move(self, column, row - 1))
+
+            #Bicie:
+            if column != 1 and row != 1 and get((column - 1, row - 1)) is not None:
+                if get((column - 1, row - 1)).is_white != self.is_white:
+                    add_moves(Move(self, column - 1, row - 1, get((column - 1, row - 1))))
+            if column != 8 and row != 1 and get((column + 1, row - 1)) is not None:
+                if get((column + 1, row - 1)).is_white != self.is_white:
+                    add_moves(Move(self, column + 1, row - 1, get((column + 1, row - 1))))
 
         return possible_moves
