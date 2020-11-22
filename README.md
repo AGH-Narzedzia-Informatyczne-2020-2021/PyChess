@@ -17,3 +17,4 @@ Cel projektu
 *Gists:*
 
  - Natalia Hałata: https://gist.github.com/halatanatalia/9fb69e7223b3f1b03ed0ea0a424ce9e2 https://gist.github.com/halatanatalia/b5c00ab527a490cff19679c532e8618e
+ - Aneta Postrożny: https://gist.github.com/anetaap/d561cd11f6c929fe8acc1adef90819af https://gist.github.com/anetaap/0b224101ab7e843fe235d5ecad119411
