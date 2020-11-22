@@ -21,4 +21,5 @@ Cel projektu
 
 
 *GitHub Pages:*
--Aneta Postrożny: https://anetaap.github.io/
+
+ - Aneta Postrożny: https://anetaap.github.io/
