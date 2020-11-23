@@ -58,6 +58,8 @@ class Board:
         self.pieces.append(King(1, 8, False, self.pieces))
         self.pieces.append(Rook(8, 8, False, self.pieces))
 
+
+
     def game(self):
         run = True
         while run:
