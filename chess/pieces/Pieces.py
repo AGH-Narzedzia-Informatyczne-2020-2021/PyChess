@@ -8,6 +8,34 @@ from chess.pieces.Queen import Queen
 
 class Pieces(list):
 
+    def __init__(self):
+        super().__init__()
+
+        self.append(King(5, 1, True, self))
+        self.append(King(5, 8, False, self))
+
+        self.append(Queen(4, 1, True, self))
+        self.append(Queen(4, 8, False, self))
+
+        self.append(Rook(1, 1, True, self))
+        self.append(Rook(8, 1, True, self))
+        self.append(Rook(8, 8, False, self))
+        self.append(Rook(1, 8, False, self))
+
+        self.append(Knight(7, 1, True, self))
+        self.append(Knight(2, 1, True, self))
+        self.append(Knight(2, 8, False, self))
+        self.append(Knight(7, 8, False, self))
+
+        self.append(Bishop(6, 1, True, self))
+        self.append(Bishop(3, 1, True, self))
+        self.append(Bishop(3, 8, False, self))
+        self.append(Bishop(6, 8, False, self))
+
+        for column in range(1, 9):
+            self.append(Pawn(column, 2, True, self))
+            self.append(Pawn(column, 7, False, self))
+
     def get(self, square):
         for piece in self:
             if square == (piece.column, piece.row):
