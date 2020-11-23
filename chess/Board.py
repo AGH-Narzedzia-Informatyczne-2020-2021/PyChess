@@ -31,7 +31,6 @@ def coordinates_to_chess_tiles(col, row):
 class Board:
     def __init__(self):
         self.pieces = Pieces()
-        self.basic_pieces_placer()
         self.window = pg.display.set_mode((WIDTH, HEIGHT))
         pg.display.set_caption(WINDOW_NAME)
         self.turn = True  # True -> white Black ->False
@@ -51,14 +50,6 @@ class Board:
                 if piece is not None:
                     self.window.blit(piece.image, square)
         pg.display.flip()
-
-    def basic_pieces_placer(self):
-        self.pieces.append(King(1, 1, True, self.pieces))
-        self.pieces.append(Rook(8, 1, True, self.pieces))
-        self.pieces.append(King(1, 8, False, self.pieces))
-        self.pieces.append(Rook(8, 8, False, self.pieces))
-
-
 
     def game(self):
         run = True
