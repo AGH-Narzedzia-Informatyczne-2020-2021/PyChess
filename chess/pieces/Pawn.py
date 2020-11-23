@@ -19,23 +19,23 @@ class Pawn(Piece):
 
         possible_moves = []
 
-        canditades_for_moves = []
+        candidates_for_moves = []
 
-        canditade = ((self.column, self.row + (1 if self.is_white else -1))) # warunek?prawda:fałsz
+        candidate = (self.column, self.row + (1 if self.is_white else -1))
 
-        if self.pieces.get(canditade) is None:
-            possible_moves.append(Move(self, canditade[0], canditade[1]))
+        if self.pieces.get(candidate) is None:
+            possible_moves.append(Move(self, candidate[0], candidate[1]))
             if self.row == 2 if self.is_white else 7:
-                canditade = ((self.column, self.row + (2 if self.is_white else -2)))
-                if self.pieces.get(canditade) is None:
-                    possible_moves.append(Move(self, canditade[0], canditade[1]))
+                candidate = (self.column, self.row + (2 if self.is_white else -2))
+                if self.pieces.get(candidate) is None:
+                    possible_moves.append(Move(self, candidate[0], candidate[1]))
 
-        canditades = [(self.column + change, self.row + (1 if self.is_white else -1)) for change in [1, -1]]
+        candidates = [(self.column + change, self.row + (1 if self.is_white else -1)) for change in [1, -1]]
 
-        for canditade in canditades:
-            if canditade[0] in range(1, 9) and canditade[1] in range(1, 9):
-                captured_piece = self.pieces.get(canditade)
+        for candidate in candidates:
+            if candidate[0] in range(1, 9) and candidate[1] in range(1, 9):
+                captured_piece = self.pieces.get(candidate)
                 if captured_piece is not None and captured_piece.is_white != self.is_white:
-                    possible_moves.append(Move(self, canditade[0], canditade[1], captured_piece))
+                    possible_moves.append(Move(self, candidate[0], candidate[1], captured_piece))
 
         return possible_moves
