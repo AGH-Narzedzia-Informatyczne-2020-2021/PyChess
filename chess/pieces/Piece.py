@@ -13,7 +13,7 @@ class Piece(ABC):
         self.load_image()
 
     def move(self, column, row):
-        for move in self.get_possible_moves():
+        for move in self.get_legal_moves():
             if (column, row) == (move.column, move.row):
                 move.do()
                 return True

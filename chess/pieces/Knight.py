@@ -46,4 +46,6 @@ class Knight(Piece):
             add_moves([(self.column - 1, self.row + 2)])
             add_moves([(self.column - 1, self.row - 2)])
 
+
             return possible_moves
+
