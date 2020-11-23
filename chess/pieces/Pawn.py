@@ -19,55 +19,23 @@ class Pawn(Piece):
 
         possible_moves = []
 
-        column = self.column
-        row = self.row
-        add_moves = possible_moves.append
-        get = self.pieces.get
+        canditades_for_moves = []
 
-        #Biale
-        if self.is_white:
-            #Ruch z pozycji startowej
-            if row == 2:
-                if get((column, row + 2)) is None and get((column, row + 1)) is None:
-                    add_moves(Move(self, column, row + 2))
-                    add_moves(Move(self, column, row + 1))
-                elif get((column, row + 2)) is not None and get((column, row + 1)) is None:
-                    add_moves(Move(self, column, row + 1))
+        canditade = ((self.column, self.row + (1 if self.is_white else -1))) # warunek?prawda:fałsz
 
-            #Zwykly ruch
-            elif row != 8:
-                if get((column, row + 1)) is None:
-                    add_moves(Move(self, column, row + 1))
+        if self.pieces.get(canditade) is None:
+            possible_moves.append(Move(self, canditade[0], canditade[1]))
+            if self.row == 2 if self.is_white else 7:
+                canditade = ((self.column, self.row + (2 if self.is_white else -2)))
+                if self.pieces.get(canditade) is None:
+                    possible_moves.append(Move(self, canditade[0], canditade[1]))
 
-            #Bicie
-            if column != 8 and row != 8 and get((column + 1, row + 1)) is not None:
-                if get((column + 1, row + 1)).is_white != self.is_white:
-                    add_moves(Move(self, column + 1, row + 1, get((column + 1, row + 1))))
-            if column != 1 and row != 8 and get((column - 1, row + 1)) is not None:
-                if get((column - 1, row + 1)).is_white != self.is_white:
-                    add_moves(Move(self, column - 1, row + 1, get((column - 1, row + 1))))
+        canditades = [(self.column + change, self.row + (1 if self.is_white else -1)) for change in [1, -1]]
 
-        #Czarne:
-        else:
-            #Ruch z pozycji startowej
-            if row == 7:
-                if get((column, row - 2)) is None and get((column, row - 1)) is None:
-                    add_moves(Move(self, column, row - 1))
-                    add_moves(Move(self, column, row - 2))
-                elif get((column, row - 2)) is not None and get((column, row - 1)) is None:
-                    add_moves(Move(self, column, row - 1))
-
-            #Zwykly ruch
-            elif row != 1:
-                if get((column, row - 1)) is None:
-                    add_moves(Move(self, column, row - 1))
-
-            #Bicie:
-            if column != 1 and row != 1 and get((column - 1, row - 1)) is not None:
-                if get((column - 1, row - 1)).is_white != self.is_white:
-                    add_moves(Move(self, column - 1, row - 1, get((column - 1, row - 1))))
-            if column != 8 and row != 1 and get((column + 1, row - 1)) is not None:
-                if get((column + 1, row - 1)).is_white != self.is_white:
-                    add_moves(Move(self, column + 1, row - 1, get((column + 1, row - 1))))
+        for canditade in canditades:
+            if canditade[0] in range(1, 9) and canditade[1] in range(1, 9):
+                captured_piece = self.pieces.get(canditade)
+                if captured_piece is not None and captured_piece.is_white != self.is_white:
+                    possible_moves.append(Move(self, canditade[0], canditade[1], captured_piece))
 
         return possible_moves

@@ -4,7 +4,6 @@ from chess.Move import Move
 import pygame as pg
 import os
 
-
 class Knight(Piece):
 
     def load_image(self):
@@ -15,34 +14,36 @@ class Knight(Piece):
             path = os.path.join(os.getcwd(), 'pieces_graphics', 'bN.png')
             self.image = pg.transform.scale(pg.image.load(path), (SQUARE_SIZE, SQUARE_SIZE))
 
+
     def get_possible_moves(self):
 
-        possible_moves = []
+            possible_moves = []
 
-        def add_moves(candidates_for_moves):
 
-            for square in candidates_for_moves:
+            def add_moves(candidates_for_moves):
 
-                piece = self.pieces.get(square)
+                for square in candidates_for_moves:
 
-                if piece is None:
-                    possible_moves.append(Move(self, square[0], square[1]))
+                    piece = self.pieces.get(square)
 
-                elif piece.is_white != self.is_white:
-                    captured_piece = self.pieces.get(square)
-                    possible_moves.append(Move(self, square[0], square[1], captured_piece=captured_piece))
-                    return
+                    if piece is None:
+                        possible_moves.append(Move(self, square[0], square[1]))
 
-                else:
-                    return
+                    elif piece.is_white != self.is_white:
+                        captured_piece = self.pieces.get(square)
+                        possible_moves.append(Move(self, square[0], square[1], captured_piece=captured_piece))
+                        return
 
-        add_moves([(self.column + 1, self.row + 2)])
-        add_moves([(self.column + 1, self.row - 2)])
-        add_moves([(self.column - 1, self.row + 2)])
-        add_moves([(self.column - 1, self.row - 2)])
-        add_moves([(self.column + 2, self.row + 1)])
-        add_moves([(self.column + 2, self.row - 1)])
-        add_moves([(self.column - 2, self.row + 1)])
-        add_moves([(self.column - 2, self.row - 1)])
+                    else:
+                        return
 
-        return possible_moves
+            add_moves([(self.column + 2, self.row + 1)])
+            add_moves([(self.column + 2, self.row - 1)])
+            add_moves([(self.column + 1, self.row + 2)])
+            add_moves([(self.column + 1, self.row - 2)])
+            add_moves([(self.column - 2, self.row + 1)])
+            add_moves([(self.column - 2, self.row - 1)])
+            add_moves([(self.column - 1, self.row + 2)])
+            add_moves([(self.column - 1, self.row - 2)])
+
+            return possible_moves
