@@ -24,6 +24,7 @@ class Move:
             self.pieces.remove(self.captured_piece)
         if self.rook_move is not None:
             self.rook_move.do()
+        self.pieces.moves.append(self)
 
     def undo(self):
         self.piece.column = self.previous_column
@@ -32,3 +33,4 @@ class Move:
             self.pieces.append(self.captured_piece)
         if self.rook_move is not None:
             self.rook_move.undo()
+        self.pieces.moves.remove(self)

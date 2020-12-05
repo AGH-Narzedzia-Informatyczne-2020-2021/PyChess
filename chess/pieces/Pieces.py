@@ -11,6 +11,8 @@ class Pieces(list):
     def __init__(self):
         super().__init__()
 
+        self.moves = []
+
         self.append(King(5, 1, True, self))
         self.append(King(5, 8, False, self))
 
