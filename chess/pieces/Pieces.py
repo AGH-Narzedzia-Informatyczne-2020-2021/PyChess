@@ -6,8 +6,8 @@ from chess.pieces.Bishop import Bishop
 from chess.pieces.Queen import Queen
 
 
-WHITE_WON = 0
-BLACK_WON = 1
+WHITE_WON = 1
+BLACK_WON = 0
 DRAW = 2
 
 class Pieces(list):

@@ -61,3 +61,16 @@ class Pawn(Piece):
             self.pieces.remove(queen)
         self.pieces.append(self)
 
+
+    def promote(self):
+        global queen
+        queen = Queen(self.column, self.row, self.is_white, self.pieces)
+        self.pieces.append(queen)
+        self.pieces.remove(self)
+
+    def unpromote(self):
+        global queen
+        if queen in self.pieces:
+            self.pieces.remove(queen)
+        self.pieces.append(self)
+

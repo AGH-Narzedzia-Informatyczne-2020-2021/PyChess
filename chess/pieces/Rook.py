@@ -34,9 +34,9 @@ class Rook(Piece):
                 else:
                     return
 
-        add_moves([(self.column, row) for row in range(self.row + 1, 9)])               # pola w górę od wieży
-        add_moves([(self.column, row) for row in range(self.row - 1, 0, -1)])           # pola w dół od wieży
-        add_moves([(column, self.row) for column in range(self.column + 1, 9)])         # pola na prawo od wieży
-        add_moves([(column, self.row) for column in range(self.column - 1, 0, -1)])     # pola na lewo od wieży
+        add_moves([(self.column, row) for row in range(self.row + 1, 9)])  # pola w górę od wieży
+        add_moves([(self.column, row) for row in range(self.row - 1, 0, -1)])  # pola w dół od wieży
+        add_moves([(column, self.row) for column in range(self.column + 1, 9)])  # pola na prawo od wieży
+        add_moves([(column, self.row) for column in range(self.column - 1, 0, -1)])  # pola na lewo od wieży
 
         return possible_moves
