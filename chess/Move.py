@@ -1,5 +1,5 @@
 class Move:
-    def __init__(self, piece, column, row, captured_piece=None, rook_move=None):
+    def __init__(self, piece, column, row, captured_piece=None, rook_move=None, pawn_promotion=False):
         self.piece = piece
         self.pieces = piece.pieces
         self.column = column
@@ -8,6 +8,7 @@ class Move:
         self.rook_move = rook_move
         self.previous_column = None
         self.previous_row = None
+        self.pawn_promotion = pawn_promotion
 
     def causes_self_check(self):
         self.do()
@@ -24,6 +25,9 @@ class Move:
             self.pieces.remove(self.captured_piece)
         if self.rook_move is not None:
             self.rook_move.do()
+        if self.pawn_promotion:
+            self.piece.promote()
+
 
     def undo(self):
         self.piece.column = self.previous_column
@@ -32,3 +36,5 @@ class Move:
             self.pieces.append(self.captured_piece)
         if self.rook_move is not None:
             self.rook_move.undo()
+        if self.pawn_promotion:
+            self.piece.unpromote()
