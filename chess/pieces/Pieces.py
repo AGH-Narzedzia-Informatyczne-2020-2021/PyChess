@@ -6,6 +6,10 @@ from chess.pieces.Bishop import Bishop
 from chess.pieces.Queen import Queen
 
 
+WHITE_WON = 0
+BLACK_WON = 1
+DRAW = 2
+
 class Pieces(list):
 
     def __init__(self):
@@ -56,6 +60,18 @@ class Pieces(list):
                     if move.captured_piece == king:
                         return True
         return False
+
+    def end_of_the_game(self, is_white_turn):
+        moves = []
+        for piece in self:
+            if piece.is_white == is_white_turn:
+                moves.extend(piece.get_legal_moves())
+        if len(moves) == 0:
+            if self.is_checked(is_white_turn):
+                return BLACK_WON if is_white_turn else WHITE_WON
+            return DRAW
+        return None
+
 
     def copy(self):
         copied = Pieces()
